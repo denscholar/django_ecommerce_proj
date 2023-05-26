@@ -1,0 +1,43 @@
+TESTING 
+It's not alwways easy to know what files you need to test and what can help in cases like that is to use the package called 'coverage'.
+
+1. To use coverage => pip install coverage
+COMMANDS TO RUN coverage
+- coverage run manage.py test
+- coverage report
+- coverage html
+2. run "coverage report" to give you full report of what files that needs to be tested 
+
+However, you cam ommit the files that's not created by you. 
+- run - coverage run --omit='*/env/*' manage.py test
+
+Django livereload command 
+1. Install package: pip install django-livereload-server
+2. Add 'livereload' to the INSTALLED_APPS, before 'django.contrib.staticfiles'
+INSTALLED_APPS = (
+    ...
+    'livereload',
+    ...
+)
+3. Next you need to inject the loading of the livereload javascript. You can do this in one of two ways:
+
+Through middleware by adding 'livereload.middleware.LiveReloadScript' to MIDDLEWARE_CLASSES (probably at the end):
+
+MIDDLEWARE_CLASSES = (
+    ...
+    'livereload.middleware.LiveReloadScript',
+)
+Usage:
+
+keep the livereload server running.
+
+Start the django development server as usual (in another console):
+
+$ python manage.py runserver
+In the browser's address bar access your web app by doing:
+python manage.py livereload
+
+
+
+STYLE GUIDE
+1. pip install flake8: run flake8
