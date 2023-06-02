@@ -52,7 +52,7 @@
   <div class="container-fluid position-relative p-0">
     <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
       <a
-        href=""
+        href="/"
         class="navbar-brand p-0 d-flex justify-content-center align-items-center"
       >
         <!-- <h1 class="text-primary m-0">
@@ -73,8 +73,6 @@
         <div class="navbar-nav ms-auto py-0">
           <a href="#" class="nav-item nav-link active">Home</a>
           <a href="#" class="nav-item nav-link">About</a>
-          <a href="#" class="nav-item nav-link">Services</a>
-          <a href="#" class="nav-item nav-link">Packages</a>
           <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
               >Categories</a
@@ -85,13 +83,18 @@
                 >{{ category.name|title }}</a
               >
               {% endfor %}
-              <!-- <a href="#" class="dropdown-item">Booking</a>
-              <a href="#" class="dropdown-item">Travel Guides</a>
-              <a href="#" class="dropdown-item">Testimonial</a>
-              <a href="#" class="dropdown-item">404 Page</a> -->
+
             </div>
           </div>
           <a href="#" class="nav-item nav-link">Contact</a>
+          <!-- Add the shopping cart item -->
+        <a href="{% url 'cart:cart' %}" class="d-flex">
+          <button class="btn btn-primary py-2 px-4" type="submit">
+            <i class="bi-cart-fill me-1"></i>
+            Cart
+            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+          </button>
+        </a>
         </div>
         <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
       </div>
