@@ -560,4 +560,12 @@ h6,
   animation: action 1s infinite alternate;
 }
 
-/* Shopping Cart */
+/* Signup */
+.img-fluid{
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.card.box-shadow{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px !important;
+}

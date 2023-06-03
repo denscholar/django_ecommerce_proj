@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import CustomUser
 from django.utils.text import slugify
 from django.urls import reverse
 import uuid
@@ -28,7 +28,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="products"
     )
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=255)
     author = models.CharField(max_length=50, default="admin")
