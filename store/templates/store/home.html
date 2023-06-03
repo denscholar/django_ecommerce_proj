@@ -1,42 +1,51 @@
-{% extends "base.html" %}
-{% load static %}
-
-
-{% block content %}
-   <!-- Products Start -->
-    <div class="container-fluid pt-5">
-        <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">Trandy Products</span></h2>
+{% extends "base.html" %} {% load static %} {% block content %} 
+{% load humanize%}
+<!-- Products Start -->
+<div class="container-fluid pt-5">
+  <div class="text-center mb-4">
+    <h2 class="section-title px-5">
+      <span class="px-2">Trandy Products</span>
+    </h2>
+  </div>
+  <div class="row px-xl-5 pb-3">
+    <div class="pb-3 h5">All Product</div>
+    {% for product in all_products %}
+    <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+      <div class="card product-item border-0 mb-4">
+        <div
+          class="card-header product-img position-relative overflow-hidden bg-transparent border p-0"
+        >
+          <img class="img-fluid w-100" src="{{ product.image.url}}" alt="" />
         </div>
-        <div class="row px-xl-5 pb-3">
-            <div class="pb-3 h5">All Product</div>
-            {% for product in all_products  %}
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="{{ product.image.url}}" alt="">
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">{{ product.name }}</h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>₦{{product.price}}</h6>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                        <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
-                    </div>
-                </div>
-            </div>   
-            {% endfor %}        
+        <div
+          class="card-body border-left border-right text-center p-0 pt-4 pb-3"
+        >
+          <h6 class="text-truncate mb-3">{{ product.name }}</h6>
+          <div class="d-flex justify-content-center">
+            <h6>₦{{product.price|intcomma}}</h6>
+          </div>
         </div>
+        <div class="card-footer d-flex justify-content-between bg-light border">
+          {% csrf_token %}
+          <a
+            href="{% url 'store:product_detail' product.slug %}"
+            class="btn btn-sm text-dark p-0"
+            ><i class="fas fa-eye text-primary mr-1"></i>View Detail</a
+          >
+          <button
+            class="btn btn-sm text-dark p-0 add-to-cart"
+            data-product="{{product.product_id}}"
+            data-action="add"
+            id="add_button"
+            value="{{product_id}}"
+          >
+            <i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart
+          </button>
+        </div>
+      </div>
     </div>
-    <!-- Products End -->
+    {% endfor %}
+  </div>
+</div>
+<!-- Products End -->
 {% endblock %}
-    
-
-
-
-    
-
-    
