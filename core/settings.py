@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-ftr46#9n4f1k4edc(f2=kj#^^d(op_=!e9bn4r1nkpi19u(%71
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     "cart",
     "corsheaders",
     "accounts",
+    "widget_tweaks",
 ]
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -86,13 +89,13 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'my_declutter',
-        'USER': 'postgres',
-        'PASSWORD': 'sunshine',
-        'HOST': 'localhost',
-        'PORT': 5432,
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "my_declutter",
+        "USER": "postgres",
+        "PASSWORD": "sunshine",
+        "HOST": "localhost",
+        "PORT": 5432,
     }
 }
 
@@ -100,7 +103,7 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.AllowAllUsersModelBackend",
-    'accounts.backend.CaseInsensitiveModelBackend',
+    "accounts.backend.CaseInsensitiveModelBackend",
 )
 
 
@@ -162,3 +165,10 @@ CORS_ORIGIN_ALLOW_ALL = True
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }
+
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '4119af13ca62f3'
+EMAIL_HOST_PASSWORD = '0c0f2d6f78cd9c'
+EMAIL_PORT = '2525'

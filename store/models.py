@@ -59,9 +59,11 @@ class Product(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
+        if not self.product_id:
+            self.product_id = uuid.uuid4()
         if not self.slug:
-            # Combine the name and ID
+        # Combine the name and ID
             slug_text = f"{slugify(self.name)}-{str(self.product_id)}"
-            # Generate a unique slug
+        # Generate a unique slug
             self.slug = slug_text
-        return super().save(self, *args, **kwargs)
+        return super().save(*args, **kwargs)
