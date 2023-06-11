@@ -24,7 +24,6 @@ class MyAccountManager(BaseUserManager):
         return user
         
 
-
 class CustomUser(AbstractBaseUser):
     email = models.EmailField(max_length=60, unique=True, verbose_name="email")
     first_name = models.CharField(max_length=255)
@@ -52,3 +51,13 @@ class CustomUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    profile_image = models.ImageField(upload_to='profile_images/', default='avartar.jpg')
+    location = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.user.first_name + ' ' + f"profile"
+    
