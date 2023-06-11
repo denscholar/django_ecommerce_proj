@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "store",
     "cart",
+    "dashboard",
     "corsheaders",
     "accounts",
     "widget_tweaks",
