@@ -1,0 +1,36 @@
+<div class="modal fade"
+  {% block modal-id %}
+  id="uploadProductModal{{ object.id }}"
+  {% endblock modal-id %}
+  tabindex="-1"
+  aria-labelledby="uploadProductModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadProductModalLabel">
+         Upload Product{{ object.id }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          method="POST"
+          action="{% url 'dashboard:create_product' %}"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary">Create Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
