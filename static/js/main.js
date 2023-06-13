@@ -244,3 +244,47 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+
+$(document).ready(function() {
+  // Function to load the form into the modal
+  function loadForm() {
+    $.ajax({
+      url: "{% url 'dashboard:create_product' %}",
+      type: "GET",
+      success: function(response) {
+        $("#uploadProductModal .modal-content").html(response);
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr);
+      }
+    });
+  }
+
+  // Trigger the modal when the "Upload Product" link is clicked
+  $("#uploadProductButton").click(function(e) {
+    e.preventDefault();
+    loadForm();
+    $("#uploadProductModal").modal("show");
+  });
+
+  // Submit the form using AJAX when the "Create Product" button is clicked
+  $(document).on("submit", "#uploadProductModal form", function(e) {
+    e.preventDefault();
+    var form = $(this);
+    $.ajax({
+      url: form.attr("action"),
+      type: form.attr("method"),
+      data: form.serialize(),
+      success: function(response) {
+        $("#uploadProductModal").modal("hide");
+        // Handle success response as needed
+      },
+      error: function(xhr, status, error) {
+        console.error(xhr);
+        // Handle error response as needed
+      }
+    });
+  });
+});
+

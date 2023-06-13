@@ -1,0 +1,160 @@
+{% extends "dashboard/base.html" %} {% load widget_tweaks %} {% load static %}
+{% block content %} {% include 'dashboard/sidebar.html' %}
+<div class="main-content position-relative max-height-vh-100 h-100">
+  <!-- Navbar -->
+  <nav
+    class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
+    id="navbarBlur"
+    data-scroll="true"
+  >
+    <div class="container-fluid py-1 px-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <li
+            class="breadcrumb-item text-sm text-dark active"
+            aria-current="page"
+          >
+            Profile
+          </li>
+        </ol>
+      </nav>
+      <div
+        class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
+        id="navbar"
+      >
+        <div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+        <ul class="navbar-nav justify-content-end">
+          <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+            <a
+              href="javascript:;"
+              class="nav-link text-body p-0"
+              id="iconNavbarSidenav"
+            >
+              <div class="sidenav-toggler-inner">
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+                <i class="sidenav-toggler-line"></i>
+              </div>
+            </a>
+          </li>
+          <li class="nav-item d-flex align-items-center">
+            <a href="#" class="nav-link text-body font-weight-bold px-0">
+              <i class="fa fa-user me-sm-1"></i>
+              {% if user.is_authenticated %}
+              <span class="d-sm-inline d-none">Sign Out</span>
+              {% else %}
+              <span class="d-sm-inline d-none">Sign In</span>
+              {% endif %}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="container-fluid px-2 px-md-4">
+    <div
+      class="page-header min-height-300 border-radius-xl mt-4"
+      style="
+        background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+      "
+    >
+      <span class="mask bg-gradient-primary opacity-6"></span>
+    </div>
+    <div class="card card-body mx-3 mx-md-4 mt-n6">
+      <div class="row gx-4 mb-2">
+        <div class="col-auto">
+          <div class="avatar avatar-xl position-relative">
+            <img
+              src="{% static 'img/bruce-mars.jpg' %}"
+              alt="profile_image"
+              class="w-100 border-radius-lg shadow-sm"
+            />
+          </div>
+        </div>
+        <div class="col-auto my-auto">
+          <div class="h-100">
+            <h5 class="mb-1">Upload your products here...</h5>
+          </div>
+        </div>
+        <div
+          class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3"
+        >
+          <div class="nav-wrapper position-relative end-0">
+            <ul class="nav nav-pills nav-fill p-1">
+              <li class="nav-item shadow mx-3">
+                <a
+                  class="nav-link mb-0 px-0 py-1"
+                  href="{% url 'store:products' %}"
+                >
+                  <i class="material-icons text-lg position-relative">home</i>
+                  <span class="ms-1">Go home</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <form id="contact-form" method="POST" action="{% url 'dashboard:create_product' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+          <div class="messages"></div>
+          <div class="controls">
+            <div class="row">
+              <div class="col-sm-4">
+                <label for="prod_name">Product Name</label>
+                <div class="form-group">
+                  {% render_field form.prod_name class+="prod_name" placeholder="Product name" id+="prod_name" %}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <label for="prod_price">Product Price</label>
+                <div class="form-group">
+                  {% render_field form.price class+="prod_price" placeholder="Product price" id+="prod_price" %}
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <label for="prod_category">Product Category</label>
+                <div class="form-group">
+                  {% render_field form.category class+="prod_category" placeholder="Product category" id+="prod_category" %}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label for="prod_description">Product Description</label>
+              <div class="form-group">
+                {% render_field form.description class+="prod_description" placeholder="Product Description" id+="prod_description" %}
+              </div>
+              <div class="row">
+                <div class="col-md-12 instock">
+                  {% render_field form.image class+="in_stock" placeholder="Choose image" id+="prod_image" %}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <input
+                type="submit"
+                class="btn btn-warning btn-send"
+                value="Upload Product"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 instock">
+              <label for="">Product in stock?</label>
+              {% render_field form.in_stock class+="in_stock" placeholder="Product in_stock" id+="prod_description" %}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer class="footer py-4">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between"></div>
+      </div>
+    </footer>
+  </div>
+  {% endblock %}
+</div>
